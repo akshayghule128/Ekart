@@ -53,7 +53,7 @@ pipeline {
                             """,
                             recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']],
                             attachmentsPattern: '**/sonar-report.html', // Attach any report if needed
-                            to: 'akshayghule@gmail.com'
+                            to: 'akshayghule128@gmail.com'
                         )
                     } else {
                         emailext (
@@ -62,7 +62,7 @@ pipeline {
                             The SonarQube analysis for the project **EKART** has passed with the following status: ${sonarQualityGate.status}.
                             You can view the details in the SonarQube dashboard.
                             """,
-                            to: 'akshayghule@gmail.com'
+                            to: 'akshayghule128@gmail.com'
                         )
                     }
                 }
