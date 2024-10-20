@@ -39,6 +39,35 @@ pipeline {
                 }
             }
         }
+        
+        stage('SonarQube Notification') {
+            steps {
+                script {
+                    def sonarQualityGate = waitForQualityGate()
+                    if (sonarQualityGate.status != 'OK') {
+                        emailext (
+                            subject: "SonarQube Analysis Failed: ${sonarQualityGate.status}",
+                            body: """\
+                            The SonarQube analysis for the project **EKART** has failed with the following status: ${sonarQualityGate.status}.
+                            Please check the details in the SonarQube dashboard.
+                            """,
+                            recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                            attachmentsPattern: '**/sonar-report.html', // Attach any report if needed
+                            to: 'akshayghule@gmail.com'
+                        )
+                    } else {
+                        emailext (
+                            subject: "SonarQube Analysis Passed: ${sonarQualityGate.status}",
+                            body: """\
+                            The SonarQube analysis for the project **EKART** has passed with the following status: ${sonarQualityGate.status}.
+                            You can view the details in the SonarQube dashboard.
+                            """,
+                            to: 'akshayghule@gmail.com'
+                        )
+                    }
+                }
+            }
+        }
 
         stage('OWASP Dependency Check') {
             steps {
