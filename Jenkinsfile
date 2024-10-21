@@ -35,8 +35,7 @@ pipeline {
                     sh "${env.SCANNER_HOME}/bin/sonar-scanner \
                         -Dsonar.projectKey=EKART \
                         -Dsonar.projectName=EKART \
-                        -Dsonar.java.binaries=target/classes \
-                        ls"
+                        -Dsonar.java.binaries=target/classes"
                 }
                 archiveArtifacts artifacts: '**/target/sonar-report.json', followSymlinks: false
                 emailext attachmentsPattern: '**/target/sonar-report.json', body: 'Generating SonaqtQube report for Ekart Application.', subject: 'Sonar Report', to: 'akshayghule127@gmail.com'
