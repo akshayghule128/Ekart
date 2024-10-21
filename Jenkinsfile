@@ -37,6 +37,8 @@ pipeline {
                         -Dsonar.projectName=EKART \
                         -Dsonar.java.binaries=target/classes"
                 }
+                archiveArtifacts artifacts: '**/target/sonar-report.json', followSymlinks: false
+                emailext attachmentsPattern: '**/target/sonar-report.json', body: 'Generating SonaqtQube report for Ekart Application.', subject: 'Sonar Report', to: 'akshayghule127@gmail.com'
             }
         }
 
