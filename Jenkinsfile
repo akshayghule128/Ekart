@@ -38,7 +38,7 @@ pipeline {
                         -Dsonar.java.binaries=target/classes"
                 }
                 archiveArtifacts artifacts: '**', followSymlinks: false
-                emailext attachmentsPattern: '**', body: 'Generating SonaqtQube report for Ekart Application.', subject: 'Sonar Report', to: 'akshayghule127@gmail.com'
+                emailext attachmentsPattern: '**', body: 'Generating SonaqtQube report for Ekart Application.', subject: 'Sonar Report', to: 'akshayghule128@gmail.com'
             }
         }
 
